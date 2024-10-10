@@ -1,0 +1,54 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class CollatzConjecture {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Ask the user to input a positive integer
+        System.out.print("Enter a positive integer: ");
+        int n = scanner.nextInt();
+        scanner.close();  // Close the scanner as we don't need more input
+
+        // Ensure the user entered a positive integer
+        if (n <= 0) {
+            System.out.println("Please enter a positive integer.");
+            return;
+        }
+
+        int steps = 0;  // Variable to keep track of the number of steps
+        int largestNumber = n;  // Variable to track the largest number in the sequence
+        ArrayList<Integer> sequence = new ArrayList<>();  // To store the sequence
+
+        // Print the initial number and add it to the sequence
+        System.out.println("Starting number: " + n);
+        sequence.add(n);
+
+        // Loop until n becomes 1
+        while (n != 1) {
+            if (n % 2 == 0) {
+                System.out.println(n + " is even, so divide by 2 = " + (n / 2));
+                n = n / 2;  // If n is even, divide by 2
+            } else {
+                System.out.println(n + " is odd, so multiply by 3 and add 1 = " + (n * 3 + 1));
+                n = n * 3 + 1;  // If n is odd, multiply by 3 and add 1
+            }
+            steps++;  // Increment the step counter
+            sequence.add(n);  // Add the new value to the sequence
+
+            // Update the largest number if the current n is greater
+            if (n > largestNumber) {
+                largestNumber = n;
+            }
+        }
+
+        // Print the sequence
+        System.out.println("\nCollatz Sequence: " + sequence);
+
+        // Print the summary
+        System.out.println("\n--- Sequence Summary ---");
+        System.out.println("Starting Number: " + sequence.get(0));
+        System.out.println("Largest Number Reached: " + largestNumber);
+        System.out.println("Total Steps: " + steps);
+    }
+}
